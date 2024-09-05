@@ -17,3 +17,4 @@ export const searchJobs = async (analysis) => {
     topK: 5,
   });
   return results.matches;
+};
