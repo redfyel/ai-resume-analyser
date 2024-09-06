@@ -6,14 +6,13 @@ const AnalysisReportPage = () => {
 
   const handleAnalyzeClick = async () => {
     try {
-      const response = await fetch('/api/analyze');
+      const response = await fetch('http://localhost:4000/resume-api/upload-resume');
       const data = await response.json();
       setAnalysisResult(data);
     } catch (error) {
       console.error('Error fetching analysis data:', error);
     }
   };
-  
 
   return (
     <div className="analysis-report-page">
@@ -36,7 +35,7 @@ const AnalysisReportPage = () => {
               <div className="strengths">
                 <h3>Strengths</h3>
                 <ul>
-                  {analysisResult.strengths.map((strength, index) => (
+                  {(analysisResult.strengths || []).map((strength, index) => (
                     <li key={index}>{strength}</li>
                   ))}
                 </ul>
@@ -44,7 +43,7 @@ const AnalysisReportPage = () => {
               <div className="weaknesses">
                 <h3>Weaknesses</h3>
                 <ul>
-                  {analysisResult.weaknesses.map((weakness, index) => (
+                  {(analysisResult.weaknesses || []).map((weakness, index) => (
                     <li key={index}>{weakness}</li>
                   ))}
                 </ul>
@@ -52,7 +51,7 @@ const AnalysisReportPage = () => {
               <div className="suggestions">
                 <h3>Suggestions</h3>
                 <ul>
-                  {analysisResult.suggestions.map((suggestion, index) => (
+                  {(analysisResult.suggestions || []).map((suggestion, index) => (
                     <li key={index}>{suggestion}</li>
                   ))}
                 </ul>
