@@ -12,6 +12,23 @@ require('dotenv').config()
 userApp.use(exp.json());
 
 
+userApp.get('/user/:name', expressAsyncHandler(async (req, res) => {
+  const { name } = req.params;
+  const usersCollection = req.app.get('usersCollection');
+  
+  try {
+    const user = await usersCollection.findOne({ name });
+    if (user) {
+      res.send(user);
+    } else {
+      res.status(404).send({ message: 'User not found' });
+    }
+  } catch (error) {
+    res.status(500).send({ message: 'Server error' });
+  }
+}));
+
+
 
 //route for creating a user (public)
 userApp.post("/user", expressAsyncHandler(async(req, res) => {
@@ -20,7 +37,7 @@ userApp.post("/user", expressAsyncHandler(async(req, res) => {
   const newUser = req.body;
 
   //verify duplicate user
-  let existingUser  = await usersCollection.findOne({username:newUser.username});
+  let existingUser  = await usersCollection.findOne({username:newUser.name});
 
   //if user already existed
   if(existingUser !==null) {
@@ -49,44 +66,32 @@ userApp.put("/user", tokenVerify,expressAsyncHandler(async(req, res) => {
   res.send({message : "user's modified"})
 }));
 
+userApp.post("/login", expressAsyncHandler(async (req, res) => {
+  // Get usersCollection obj
+  const usersCollection = req.app.get('usersCollection');
 
-//user login (public)
-userApp.post("/login", expressAsyncHandler(async(req,res)=>{
-  //get usersCollection obj
-  const usersCollection = req.app.get('usersCollection')
-
-  //get new userCredrentials from client
+  // Get user credentials from client
   const userCred = req.body;
 
-  //verify username
-  let dbUser = await usersCollection.findOne({username : userCred.username})
+  // Verify username
+  let dbUser = await usersCollection.findOne({ username: userCred.name });
 
-  //if user not existed
-  if(dbUser===null){
-    res.send({message:"Invalid Username"})
-  }
+  // If user does not exist
+  if (dbUser === null) {
+    res.status(400).send({ message: "Invalid Username" });
+  } else {
+    // Compare passwords
+    let result = await bcryptjs.compare(userCred.password, dbUser.password);
 
-  //if user found, compare with passwords
-  else {
-    let result = await bcryptjs.compare(userCred.password, dbUser.password)
-
-    //if passwords  not matched
-    if(result === false){
-      res.send({message : "Invalid Password"})
-    }
-    
-    //if passowrds are matched
-    else{
-      //create JWT Token
-      let signedToken = jwt.sign({username:userCred.username},process.env.SECRET_KEY, {expiresIn: "1h"});
-
-
-      //send res
-      res.send({message : "login success", token : signedToken, user : dbUser})
+    // If passwords do not match
+    if (result === false) {
+      res.status(400).send({ message: "Invalid Password" });
+    } else {
+      // Send response with user data
+      res.status(200).send({ message: "Login success", user: dbUser });
     }
   }
-}))
-
+}));
 
 
 

@@ -13,7 +13,7 @@
   margin-bottom: 2rem;
 }
 
-.profile-pic {
+.profile-picture {
   border-radius: 50%;
   width: 150px;
   height: 150px;
@@ -109,3 +109,32 @@ ul {
 ul li {
   margin-bottom: 0.5rem;
 }
+
+.error-message {
+  color: #ff6f61;
+  font-size: 18px;
+  text-align : center;
+}
+
+.error-message button {
+  background-color: #ff6f61;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.loading-message {
+  color: #333;
+  font-size: 5rem;
+  text-align : center;
+}
+
+.loading-message button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+

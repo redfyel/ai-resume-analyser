@@ -7,6 +7,7 @@ import JobAlertsPage from './components/job-alerts/JobAlertsPage';
 import UploadResumePage from './components/upload-resume/UploadResumePage';
 import AnalysisReportPage from './components/analysis/AnalysisReportPage';
 import Register from './components/register/Register';
+import Login from './components/login/Login'
 import RootLayout from './RootLayout';
 
 function App() {
@@ -42,7 +43,15 @@ function App() {
         {
           path : 'register',
           element : <Register />
-        }
+        },
+        {
+          path : 'login',
+          element : <Login />
+        },
+        {
+          path: 'profile/:name', 
+          element: <ProfilePage />
+        },
       ]
     },
   ])
