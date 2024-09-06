@@ -142,3 +142,98 @@
     transform: scale(1);
   }
 }
+/* Pricing Section */
+.pricing-section {
+  padding: 50px 0;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.pricing-title {
+  font-size: 32px;
+  color: #ff6f61;
+  margin-bottom: 40px;
+}
+
+.pricing-cards {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+
+.pricing-card:hover {
+  transform: translateY(-10px);
+}
+
+.popular {
+  border: 2px solid #ff6f61;
+}
+
+
+.pricing-card {
+  position: relative; /* Add this */
+  background-color: white;
+  width: 280px;
+  padding: 30px;
+  margin: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.badge {
+  background-color: #ff6f61;
+  color: white;
+  padding: 5px 10px;
+  position: absolute;
+  top: 15px;  /* Adjust the badge position within the card */
+  right: 15px; /* Adjust the badge position within the card */
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+
+.price {
+  font-size: 28px;
+  color: #333;
+  margin: 20px 0;
+}
+
+.features-list {
+  list-style-type: none;
+  padding: 0;
+  color: #555;
+  font-size: 16px;
+}
+
+.features-list li {
+  margin: 10px 0;
+}
+
+.choose-plan-btn {
+  background-color: #ff6f61;
+  color: white;
+  padding: 12px 25px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+}
+
+.choose-plan-btn:hover {
+  background-color: #007BFF;
+  color : white;
+}
+
+/* Animations */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}

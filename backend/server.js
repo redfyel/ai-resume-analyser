@@ -26,11 +26,15 @@ const fsddb = connectionObj.db('resume-analysis');
 //connect to a collection
 const usersCollection = fsddb.collection('users')
 const resumeCollection = fsddb.collection('resumes')
+const recruiterCollection = fsddb.collection('recruiter-feed')
+
 
 
 //share collection obj to APIs
 app.set('usersCollection', usersCollection);
 app.set('resumeCollection', resumeCollection);
+app.set('recruiterCollection', recruiterCollection);
+
 
 
 
@@ -42,10 +46,15 @@ catch(err=>console.log("error in db connection", err))
 //import userApp
 const userApp =  require('./APIs/userAPI')
 const resumeApp =  require('./APIs/resumeAPI')
+const recruiterApp =  require('./APIs/recruiterAPI')
+
 
 
 app.use('/user-api', userApp)
 app.use('/resume-api', resumeApp)
+app.use('/recruiter-api', recruiterApp)
+
+
 
 
 

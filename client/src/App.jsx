@@ -6,6 +6,7 @@ import FeedPage from './components/feed-page/FeedPage';
 import JobAlertsPage from './components/job-alerts/JobAlertsPage';
 import UploadResumePage from './components/upload-resume/UploadResumePage';
 import AnalysisReportPage from './components/analysis/AnalysisReportPage';
+import Register from './components/register/Register';
 import RootLayout from './RootLayout';
 
 function App() {
@@ -37,6 +38,10 @@ function App() {
         {
           path : 'feed',
           element : <FeedPage />
+        },
+        {
+          path : 'register',
+          element : <Register />
         }
       ]
     },

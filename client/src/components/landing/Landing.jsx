@@ -6,7 +6,7 @@ const LandingPage = () => {
   return (
     <div className="landing-page">
       <main className="hero">
-        <h2 className='mainT'>Welcome to ResumeAnalyzer</h2>
+        <h2 className="mainT">Welcome to ResumeAnalyzer</h2>
         <p>Your path to a perfect resume starts here.</p>
         <Link to="/upload-resume" className="cta-button">Upload Your Resume</Link>
       </main>
@@ -20,15 +20,35 @@ const LandingPage = () => {
               </div>
               <div className="card-back">
                 <h5>{feature.name}</h5>
-                <p className='lead'>{feature.description}</p>
+                <p className="lead">{feature.description}</p>
               </div>
             </div>
           </div>
         ))}
       </div>
+
+      {/* Pricing Section */}
+      <section className="pricing-section">
+        <h2 className="pricing-title">Choose Your Plan</h2>
+        <div className="pricing-cards">
+          {pricingPlans.map((plan, index) => (
+            <div key={index} className={`pricing-card ${plan.popular ? 'popular' : ''}`}>
+              {plan.popular && <div className="badge">Most Popular</div>}
+              <h3>{plan.name}</h3>
+              <p className="price">{plan.price}</p>
+              <ul className="features-list">
+                {plan.features.map((feature, i) => (
+                  <li key={i}>{feature}</li>
+                ))}
+              </ul>
+              <Link to={plan.link} className="choose-plan-btn">Choose Plan</Link>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
-}
+};
 
 const features = [
   {
@@ -46,6 +66,28 @@ const features = [
   {
     name: 'Expert Tips',
     description: 'Access a library of expert tips and best practices to craft a resume that truly represents your skills and achievements.'
+  }
+];
+
+const pricingPlans = [
+  {
+    name: 'Basic',
+    price: '$19/month',
+    features: ['Basic Resume Analysis', 'Standard Feedback', 'Email Support'],
+    link: '/basic-plan'
+  },
+  {
+    name: 'Pro',
+    price: '$39/month',
+    features: ['Advanced Resume Analysis', 'Real-time Feedback', 'Priority Support'],
+    link: '/pro-plan',
+    popular: true
+  },
+  {
+    name: 'Premium',
+    price: '$59/month',
+    features: ['Full Resume Analysis', 'Expert Feedback', '1-on-1 Consultation', 'Premium Support'],
+    link: '/premium-plan'
   }
 ];
 

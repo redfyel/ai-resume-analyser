@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { parse } = require('resume-parser'); // Assuming resume-parser is a valid library
+const { parse } = require('resume-parser'); 
 
 // Function to process the resume file and extract data
 const processResume = (filePath) => {
@@ -8,7 +8,6 @@ const processResume = (filePath) => {
         // Call the parsing library or custom logic
         parseResumeFile(filePath)
             .then((parsedData) => {
-                // Structure the parsed data (you can modify this based on your needs)
                 const processedData = {
                     name: parsedData.name || "Unknown",
                     experience: parsedData.experience || 0,
