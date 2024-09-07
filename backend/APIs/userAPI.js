@@ -74,7 +74,7 @@ userApp.post("/login", expressAsyncHandler(async (req, res) => {
   const userCred = req.body;
 
   // Verify username
-  let dbUser = await usersCollection.findOne({ username: userCred.name });
+  let dbUser = await usersCollection.findOne({ name: userCred.username });
 
   // If user does not exist
   if (dbUser === null) {
