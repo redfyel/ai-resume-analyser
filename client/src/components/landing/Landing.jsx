@@ -6,7 +6,7 @@ const LandingPage = () => {
   return (
     <div className="landing-page">
       <main className="hero">
-        <h2 className="mainT">Welcome to ResumeAnalyzer</h2>
+        <h2 className="mainT">Welcome to ResumeRefine</h2>
         <p>Your path to a perfect resume starts here.</p>
         <Link to="/upload-resume" className="cta-button">Upload Your Resume</Link>
       </main>

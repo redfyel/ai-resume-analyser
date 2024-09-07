@@ -8,37 +8,23 @@ const UploadResumePage = () => {
   const [filePreview, setFilePreview] = useState(null);
   const [file, setFile] = useState(null);
   const navigate = useNavigate();
-  const handleFileUpload = async (e) => {
-    const file = e.target.files[0];
-    setFile(file);
-    
-    if (file) {
-        setUploadStatus('Uploading...');
-        setAnalysisVisible(false);
-        setFilePreview(URL.createObjectURL(file));
+  const handleFileUpload = (e) => {
+    const uploadedFile = e.target.files[0];
+    setFile(uploadedFile);
 
-        const formData = new FormData();
-        formData.append('resume', file);
+    if (uploadedFile) {
+      setUploadStatus('Uploading...');
+      setAnalysisVisible(false);
+      setFilePreview(URL.createObjectURL(uploadedFile));
 
-        try {
-            const response = await fetch('http://localhost:4000/resume-api/upload-resume', {
-                method: 'POST',
-                body: formData
-            });
-
-            const result = await response.json();
-
-            if (response.ok && result.success) {
-                setUploadStatus('Upload Complete!');
-                setAnalysisVisible(true);
-            } else {
-                setUploadStatus('Upload Failed: ' + (result.message || 'Unknown error'));
-            }
-        } catch (error) {
-            setUploadStatus('Upload Failed! ' + error.message);
-        }
+      // Simulating file upload and analysis
+      setTimeout(() => {
+        setUploadStatus('Upload Complete!');
+        setAnalysisVisible(true);
+      }, 1500);
     }
-};
+  };
+
 
 
 
