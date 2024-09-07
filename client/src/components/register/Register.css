@@ -157,3 +157,28 @@
   font-size: 12px;
   margin-top: 5px;
 }
+.selected-interests {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.interest-tag {
+  background-color: #ff6f61;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.remove-tag {
+  cursor: pointer;
+  background-color: #fff;
+  color: #ff6f61;
+  padding: 0.2rem 0.5rem;
+  border-radius: 50%;
+  font-weight: bold;
+}

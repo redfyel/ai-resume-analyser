@@ -67,6 +67,20 @@ const ProfilePage = () => {
           ))}
         </ul>
       </section>
+      <div className="interests-section">
+          <h3>Interests</h3>
+          <div className="interests-tags">
+            {userData.interests && userData.interests.length > 0 ? (
+              userData.interests.map((interest, index) => (
+                <span key={index} className="interest-tag">
+                  {interest}
+                </span>
+              ))
+            ) : (
+              <p>No interests added yet.</p>
+            )}
+          </div>
+        </div>
     </div>
   );
 };

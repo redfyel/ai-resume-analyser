@@ -14,10 +14,28 @@ const Register = () => {
     control,
     name: "achievements"
   });
+  const [selectedInterests, setSelectedInterests] = useState([]);
   const navigate = useNavigate();
+
+  const interestsOptions = [
+    "Software Developer", "Designer", "Data Scientist", "Product Manager", "DevOps Engineer"
+  ];
+
+  const handleInterestSelect = (event) => {
+    const value = event.target.value;
+    if (!selectedInterests.includes(value) && value !== "") {
+      setSelectedInterests([...selectedInterests, value]);
+    }
+  };
+
+  const removeInterest = (interest) => {
+    setSelectedInterests(selectedInterests.filter((i) => i !== interest));
+  };
 
   const onSubmit = async (data) => {
     try {
+      // Include selected interests in the data
+      data.interests = selectedInterests;
       const response = await axios.post("http://localhost:4000/user-api/user", data);
 
       if (response.status === 200) {
@@ -101,6 +119,24 @@ const Register = () => {
             className="form-control"
           />
         </div>
+
+        <div className="form-group">
+          <label htmlFor="interests">Job Interests</label>
+          <select onChange={handleInterestSelect} className="form-control">
+            <option value="">Select an interest</option>
+            {interestsOptions.map((option, index) => (
+              <option key={index} value={option}>{option}</option>
+            ))}
+          </select>
+          <div className="selected-interests">
+            {selectedInterests.map((interest, index) => (
+              <div key={index} className="interest-tag">
+                {interest}
+                <span className="remove-tag" onClick={() => removeInterest(interest)}>x</span>
+              </div>
+            ))}
+          </div>
+        </div>
         <div className="form-group">
           <label htmlFor="achievements">Achievements (up to 5)</label>
           {fields.map((field, index) => (
@@ -131,6 +167,8 @@ const Register = () => {
           </button>
           {fields.length === 5 && <span className="max-achievements-message">Maximum of 5 achievements allowed</span>}
         </div>
+
+        
         <button type="submit" className="submit-button">Register</button>
       </form>
     </div>
